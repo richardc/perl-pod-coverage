@@ -34,13 +34,13 @@ Pod::Coverage - Checks if the documentation of a module is comprehensive
 
 Developers hate writing documentation.  They'd hate it even more if
 their computer tattled on them, but maybe they'll be even more
-thankful in the long run.  Even if not, perlmodstyle tells you to, so
+thankful in the long run.  Even if not, F<perlmodstyle> tells you to, so
 you must obey.
 
 This module provides a mechanism for determining if the pod for a
 given module is comprehensive.
 
-It expects to find either a =head(n>1) or an =item block documenting a
+It expects to find either a C<< =head(n>1) >> or an C<=item> block documenting a
 subroutine.
 
 Consider:
@@ -59,7 +59,7 @@ Consider:
  1;
  __END__
 
-In this example Foo::foo is covered, but Foo::bar is not, so the Foo
+In this example C<Foo::foo> is covered, but C<Foo::bar> is not, so the C<Foo>
 package is only 50% (0.5) covered
 
 =head2 Methods
@@ -150,7 +150,7 @@ sub coverage {
 
 =item $object->why_unrated
 
-C<$object->coverage> may return C<undef>, to indicate that it was
+C<< $object->coverage >> may return C<undef>, to indicate that it was
 unable to deduce coverage for a package.  If this happens you should
 be able to check C<why_unrated> to get a useful excuse.
 
@@ -185,7 +185,7 @@ sub naked {
 Returns a list of covered routines, will implicitly call coverage if
 it's not previously been called.
 
-As with C<naked> private and 'trustme' identifiers will be skipped.
+As with C<naked>, private and 'trustme' identifiers will be skipped.
 
 =cut
 
@@ -223,7 +223,7 @@ sub import {
 =head2 Debugging support
 
 In order to allow internals debugging, while allowing the optimiser to
-do it's thang, Pod::Coverage uses constant subs to define how it traces.
+do its thang, C<Pod::Coverage> uses constant subs to define how it traces.
 
 Use them like so
 
@@ -255,7 +255,7 @@ this comment goes away.
 
 =item $object->_CvGV($symbol)
 
-Return the GV for the coderef supplied.  Used by _get_syms to identify
+Return the GV for the coderef supplied.  Used by C<_get_syms> to identify
 locally defined code.
 
 You probably won't need to override this one.

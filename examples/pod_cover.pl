@@ -6,7 +6,8 @@ use Pod::Coverage;
 use lib 'lib';			# to test distribution inside './lib'
 use strict;
 
-print "Pod coverage analysis v1.00 (C) by Tels 2001.\n\n";
+print "Pod coverage analysis v1.00 (C) by Tels 2001.\n";
+print "Using Pod::Coverage v$Pod::Coverage::VERSION\n\n";
 
 print scalar localtime()," Starting analysis:\n\n";
 

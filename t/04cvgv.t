@@ -1,9 +1,10 @@
 #!/usr/bin/perl -w
 use strict;
-use Test::More tests => 3;
+use Test::More tests => 4;
 use Pod::Coverage ();
 
 my $pc = Pod::Coverage->new();
+isa_ok( $pc, 'Pod::Coverage' );
 
 package wibble;
 sub bar {};
