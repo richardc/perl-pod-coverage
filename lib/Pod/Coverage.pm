@@ -376,7 +376,7 @@ sub command {
             $pod =~ s/[A-Z]<//g;
             $pod =~ s/>//g;
             # has arguments, or a semicolon
-            $pod =~ /(\S+)\s*[\(;]/   and $pod = $1;
+            $pod =~ /(\w+)\s*[;\(]/   and $pod = $1;
 
             print "Adding: '$pod'\n" if debug;
             push @{$self->{identifiers}}, $pod;

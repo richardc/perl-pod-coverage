@@ -17,5 +17,14 @@ rhubarb rhubarb
 
 sub transaction_level {}
 
+=head2 $self->frobnicate();
+
+mushrooms mushrooms
+
+=cut
+
+sub frobnicate {}
+
+
 1;
 
