@@ -10,7 +10,7 @@ use DynaLoader ();
 use base 'DynaLoader';
 
 use vars qw/ $VERSION /;
-$VERSION = '0.13';
+$VERSION = '0.14';
 
 =head1 NAME
 
@@ -366,8 +366,9 @@ sub command {
         foreach my $pod (@pods) {
             print "Considering: '$pod'\n" if debug;
 
-            # it's dressed up like a method call
-            $pod =~ /->(.*)/       and $pod = $1;
+            # it's dressed up like a method cal
+            $pod =~ /-E<\s*gt\s*>(.*)/  and $pod = $1;
+            $pod =~ /->(.*)/            and $pod = $1;
             # it's wrapped in a pod style B<>
             $pod =~ s/[A-Z]<//g;
             $pod =~ s/>//g;

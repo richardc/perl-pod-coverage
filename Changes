@@ -1,3 +1,7 @@
+0.14	Sunday 9th May, 2004
+	Small fix from Andy Lester for when people entity escape
+	the greater than in the method call arrow.
+
 0.13	Monday 29th December, 2003
 	Fixed a case reported by Earle Martin, where 
 	=head2 C<foo(),bar(),baz()> wasn't working correctly
