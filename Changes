@@ -4,6 +4,9 @@ cvs 	Unreleased
 
 	Pulled HISTORY out into a Changes file.
 
+	Deprecated and gutted Pod::Coverage::Overloader.  The ignored
+	patterns in the base class now includes qr/^\(/.
+
 0.11	2002-02-27
 	Sort the uncovered subs reported from the import form.  From a
 	bug report from Tels.

@@ -94,11 +94,14 @@ sub new {
     my %args     = @_;
     my $class    = ref $referent || $referent;
 
-    my $private = $args{private} || [ qr/^_/,
-                                      qr/^import$/,
-                                      qr/^DESTROY$/,
-                                      qr/^AUTOLOAD$/,
-                                      qr/^bootstrap$/ ];
+    my $private = $args{private} || [
+        qr/^_/,
+        qr/^import$/,
+        qr/^DESTROY$/,
+        qr/^AUTOLOAD$/,
+        qr/^bootstrap$/,
+        qr/^\(/,
+       ];
     push @$private, @{ $args{also_private} || [] };
     my $trustme = $args{trustme} || [];
 
