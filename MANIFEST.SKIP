@@ -1,9 +1,10 @@
 ~$
-blib/
+^Build$
+^blib/
+^_build
+.svn/
 \.tar\.gz$
 \bCVS\b
-Makefile
-Makefile\.old
 \.cvsignore
 MANIFEST.SKIP
 cover_db/
