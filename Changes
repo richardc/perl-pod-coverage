@@ -1,3 +1,9 @@
+0.16	Wednesday 20th October, 2004
+	Fixed a MANIFEST bug.
+	Fixed a case reported by Jos Boumans where
+    	=head2 $self->foo; was intepreted as documentation for a
+        C<foo;> method.  (XS4ALL house style)
+	
 0.15	Tuesday 19th October, 2004
 	Correctly ignores tie subroutines (David Cantrell)
 

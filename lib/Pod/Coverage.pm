@@ -10,7 +10,7 @@ use DynaLoader ();
 use base 'DynaLoader';
 
 use vars qw/ $VERSION /;
-$VERSION = '0.15';
+$VERSION = '0.16';
 
 =head1 NAME
 
@@ -101,7 +101,7 @@ sub new {
         qr/^AUTOLOAD$/,
         qr/^bootstrap$/,
         qr/^\(/,
-	qr/^(TIE(SCALAR|ARRAY|HASH|HANDLE)|FETCH|STORE|UNTIE|FETCHSIZE|STORESIZE|POP|PUSH|SHIFT|UNSHIFT|SPLICE|DELETE|EXISTS|EXTEND|CLEAR|FIRSTKEY|NEXTKEY|PRINT|PRINTF|WRITE|READLINE|GETC|READ|CLOSE|BINMODE|OPEN|EOF|FILENO|SEEK|TELL)$/
+        qr/^(TIE(SCALAR|ARRAY|HASH|HANDLE)|FETCH|STORE|UNTIE|FETCHSIZE|STORESIZE|POP|PUSH|SHIFT|UNSHIFT|SPLICE|DELETE|EXISTS|EXTEND|CLEAR|FIRSTKEY|NEXTKEY|PRINT|PRINTF|WRITE|READLINE|GETC|READ|CLOSE|BINMODE|OPEN|EOF|FILENO|SEEK|TELL)$/
        ];
     push @$private, @{ $args{also_private} || [] };
     my $trustme = $args{trustme} || [];
@@ -375,7 +375,8 @@ sub command {
             # it's wrapped in a pod style B<>
             $pod =~ s/[A-Z]<//g;
             $pod =~ s/>//g;
-            $pod =~ /(\S+)\s*\(/   and $pod = $1;
+            # has arguments, or a semicolon
+            $pod =~ /(\S+)\s*[\(;]/   and $pod = $1;
 
             print "Adding: '$pod'\n" if debug;
             push @{$self->{identifiers}}, $pod;
