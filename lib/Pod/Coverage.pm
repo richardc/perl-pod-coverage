@@ -80,6 +80,10 @@ as private (and so need not be documented) defaults to /^_/,
 
 C<also_private> items are appended to the private list
 
+C<trustme> an array of regexen which define what symbols you just want
+us to assume are properly documented even if we can't find any docs
+for them
+
 If C<pod_from> is supplied, that file is parsed for the documentation,
 rather than using Pod::Find
 
@@ -96,7 +100,9 @@ sub new {
                                       qr/^AUTOLOAD$/,
                                       qr/^bootstrap$/ ];
     push @$private, @{ $args{also_private} || [] };
-    my $self = bless { @_, private => $private }, $class;
+    my $trustme = $args{trustme} || [];
+
+    my $self = bless { @_, private => $private, trustme => $trustme }, $class;
 }
 
 =item $object->coverage
@@ -118,6 +124,10 @@ sub coverage {
     print "tying shoelaces\n" if TRACE_ALL;
     for my $pod ( @$pods ) {
         $symbols{$pod} = 1 if exists $symbols{$pod};
+    }
+
+    foreach my $sym (keys %symbols) {
+        $symbols{$sym} = 1 if $self->_trustme_check($sym);
     }
 
     # stash the results for later
@@ -156,7 +166,7 @@ sub why_unrated {
 Returns a list of uncovered routines, will implicitly call coverage if
 it's not already been called.
 
-Note, private identifiers will be skipped.
+Note, private and 'trustme' identifiers will be skipped.
 
 =cut
 
@@ -174,7 +184,7 @@ sub naked {
 Returns a list of covered routines, will implicitly call coverage if
 it's not previously been called.
 
-As with C<naked> private identifiers will be skipped.
+As with C<naked> private and 'trustme' identifiers will be skipped.
 
 =cut
 
@@ -325,6 +335,17 @@ sub _private_check {
     return grep { $sym =~ /$_/ } @{ $self->{private} };
 }
 
+=item _trustme_check($symbol)
+
+return true if the symbol is a 'trustme' symbol
+
+=cut
+
+sub _trustme_check {
+    my($self, $sym) = @_;
+    return grep { $sym =~ /$_/ } @{$self->{trustme} };
+}
+
 bootstrap Pod::Coverage;
 
 
@@ -379,6 +400,11 @@ code undocumented.  Patches and/or failing tests welcome.
 =head1 HISTORY
 
 =over
+
+=item Version 0.12 2003-09-26
+
+Added 'trustme' so that you don't have to lie about subs being private
+when the module fails to find their docs.
 
 =item Version 0.11 2002-02-27
 
@@ -476,6 +502,8 @@ L<Test::More>, L<Devel::Cover>
 Richard Clamp <richardc@unixbeard.net>
 
 Michael Stevens <mstevens@etla.org>
+
+some contributions from David Cantrell <david@cantrell.org.uk>
 
 Copyright (c) 2001 Richard Clamp, Michael Stevens. All rights
 reserved.  This program is free software; you can redistribute it
