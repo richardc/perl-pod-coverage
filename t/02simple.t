@@ -73,3 +73,6 @@ is( $obj->why_unrated, 'no public symbols defined', 'why is correct' );
 $obj = Pod::Coverage->new( package => 'Earle' );
 is( $obj->coverage, 1, "earle is covered" );
 is( scalar $obj->covered, 2 );
+
+$obj = Pod::Coverage->new( package => 'Args' );
+is( $obj->coverage, 1, "Args is covered" );
