@@ -1,7 +1,10 @@
 MANIFEST
 README
+Changes
 Makefile.PL
-Coverage.xs
+Build.PL
+META.yml
+lib/Pod/Coverage.xs
 lib/Pod/Coverage.pm
 lib/Pod/Coverage/ExportOnly.pm
 lib/Pod/Coverage/Overloader.pm
