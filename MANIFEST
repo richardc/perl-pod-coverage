@@ -4,6 +4,7 @@ Changes
 Makefile.PL
 Build.PL
 META.yml
+bin/pod_cover
 lib/Pod/Coverage.xs
 lib/Pod/Coverage.pm
 lib/Pod/Coverage/ExportOnly.pm
@@ -32,5 +33,4 @@ t/lib/Parent.pm
 t/lib/Sibling.pm
 t/lib/Trustme.pm
 examples/check_installed
-examples/pod_cover.pl
 examples/script-covered

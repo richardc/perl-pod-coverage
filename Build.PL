@@ -4,6 +4,7 @@ use Module::Build;
 Module::Build
   ->new( module_name => "Pod::Coverage",
          license     => 'perl',
+	 script_files => [ 'bin/pod_cover' ],
          build_requires => {
              'Test::More'       => 0,
          },

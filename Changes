@@ -1,3 +1,11 @@
+0.13	Monday 29th December, 2003
+	Fixed a case reported by Earle Martin, where 
+	=head2 C<foo(),bar(),baz()> wasn't working correctly
+
+	Pod and Test fixes by Andy Lester
+
+	Now we install the pod_cover command line utility.
+
 0.12	Tuesday 30th September, 2003
 	Added 'trustme' so that you don't have to lie about subs being private
 	when the module fails to find their docs.  Work by David Cantrell.
