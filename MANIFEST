@@ -18,6 +18,7 @@ t/05parentage.t
 t/06trustme.t
 t/07pod.t
 t/08tie.t
+t/lib/Args.pm
 t/lib/Earle.pm
 t/lib/Simple1.pm
 t/lib/Simple2.pm
