@@ -397,102 +397,6 @@ code undocumented.  Patches and/or failing tests welcome.
 
 =back
 
-=head1 HISTORY
-
-=over
-
-=item Version 0.12 2003-09-26
-
-Added 'trustme' so that you don't have to lie about subs being private
-when the module fails to find their docs.
-
-=item Version 0.11 2002-02-27
-
-Sort the uncovered subs reported from the import form.  From a bug
-report from Tels.
-
-=item Version 0.10 2002-02-18
-
-Added Pod::Coverage::CountParents which counts the Pod sections from
-higher in the inheritance tree (it walks @ISA).
-
-Refactored C<_get_pods> into its own method to allow this.
-
-=item Version 0.09 2001-12-17
-
-Fixed a typo in mstevens' name (oopsie)
-
-Added C<examples/script-covered> based on an email exchange.
-
-Modified the import form so that if given one argument it's assumed to
-be the package.  From a suggestion by Mark Fowler.
-
-Changed tracing to use optimisable constants.
-
-Added why_unrated.
-
-=item Version 0.08 2001-11-14
-
-Paul Johnson beat me to making Pod::Coverage a Devel::Cover plugin, so
-that's one less thing in the TODO section.
-
-Ran the code through perltidy, made some of the changes it suggested.
-
-Worked over the parsing of the also_private flag to give it more
-consistent semantics
-
-Assimilated C<examples/pod_cover.t> from Tels
-
-=item Version 0.07
-
-Implemented _CvGV based upon code from Robin Houston.  This removes
-the dependency on Devel::Peek (the CPAN version of Devel::Peek doesn't
-supply CvGV).  This also happily makes the module work on with perl
-5.005_03.
-
-Fixed a bug in the import routine which was preventing the use form of
-derived classes.  Reports a module is unrated if coverage returns
-undef.
-
-Added Pod::Checker::Overloader.
-
-=item Version 0.06
-
-First cut at making inheritance easy.  Pod::Checker::ExportOnly isa
-Pod::Checker which only checks what Exporter is allowed to hand out.
-
-Fixed up bad docs from the 0.05 release.
-
-=item Version 0.05
-
-Used Pod::Find to deal with alternative locations for pod files.
-Introduced pod_from.  Merged some patches from Schwern.  Added in
-covered.  Assimilated C<examples/check_installed> as contributed by
-Kirrily "Skud" Robert <skud@cpan.org>.  Copes with multple functions
-documented by one section.  Added uncovered as a synonym for naked.
-
-=item Version 0.04
-
-Just 0.03 with a correctly generated README file
-
-=item Version 0.03
-
-Applied a patch from Dave Rolsky (barely 6 hours after release of
-0.02) to improve scanning of pod markers.
-
-=item Version 0.02
-
-Fixed up the import form.  Removed dependency on List::Util.  Added
-naked method.  Exposed private configuration.
-
-=item Version 0.01
-
-As #london.pm invaded Brighton, people taked about documentation
-standards.  mstevens scribbled something down, richardc coded it, the
-rest is ponies.
-
-=back
-
 =head1 SEE ALSO
 
 L<Test::More>, L<Devel::Cover>
@@ -505,8 +409,10 @@ Michael Stevens <mstevens@etla.org>
 
 some contributions from David Cantrell <david@cantrell.org.uk>
 
-Copyright (c) 2001 Richard Clamp, Michael Stevens. All rights
-reserved.  This program is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
+=head1 COPYRIGHT
+
+Copyright (c) 2001, 2003, 2003 Richard Clamp, Michael Stevens. All
+rights reserved.  This program is free software; you can redistribute
+it and/or modify it under the same terms as Perl itself.
 
 =cut
