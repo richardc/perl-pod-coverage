@@ -1,7 +1,5 @@
 use strict;
 
-package Pod::Coverage::Extractor; # placeholder, we'll come back to this later
-
 package Pod::Coverage;
 use Devel::Symdump;
 use Pod::Find qw(pod_where);
@@ -12,7 +10,7 @@ use DynaLoader ();
 use base 'DynaLoader';
 
 use vars qw/ $VERSION /;
-$VERSION = '0.12_01';
+$VERSION = '0.12';
 
 =head1 NAME
 
@@ -28,7 +26,7 @@ Pod::Coverage - Checks if the documentation of a module is comprehensive
 
   # straight OO
   use Pod::Coverage;
-  my $pc = new Pod::Coverage package => 'Pod::Coverage';
+  my $pc = Pod::Coverage-new(package => 'Pod::Coverage');
   print "We rock!" if $pc->coverage == 1;
 
 
@@ -278,7 +276,7 @@ sub _get_syms {
     return if $@;
 
     print "walking symbols\n" if TRACE_ALL;
-    my $syms = new Devel::Symdump $package;
+    my $syms = Devel::Symdump->new($package);
 
     my @symbols;
     for my $sym ( $syms->functions ) {
@@ -319,7 +317,7 @@ sub _get_pods {
     }
 
     print "parsing '$pod_from'\n" if TRACE_ALL;
-    my $pod = new Pod::Coverage::Extractor;
+    my $pod = Pod::Coverage::Extractor->new;
     $pod->parse_from_file( $pod_from, '/dev/null' );
 
     return $pod->{identifiers} || [];

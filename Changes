@@ -1,11 +1,12 @@
-cvs 	Unreleased
+0.12	Tuesday 30th September, 2003
 	Added 'trustme' so that you don't have to lie about subs being private
 	when the module fails to find their docs.  Work by David Cantrell.
 
 	Pulled HISTORY out into a Changes file.
 
 	Deprecated and gutted Pod::Coverage::Overloader.  The ignored
-	patterns in the base class now includes qr/^\(/.
+	patterns in the base class now include qr/^\(/ which is all it
+	really did only in a stupidly complex manner.
 
 0.11	2002-02-27
 	Sort the uncovered subs reported from the import form.  From a
