@@ -1,3 +1,8 @@
+0.17	Tuesday 23rd November, 2004
+	Fixed a further case reported by Jos Boumans where
+    	=head2 $self->foo(); was intepreted as documentation for a
+        C<foo()> method.  (more XS4ALL house style)
+
 0.16	Wednesday 20th October, 2004
 	Fixed a MANIFEST bug.
 	Fixed a case reported by Jos Boumans where
