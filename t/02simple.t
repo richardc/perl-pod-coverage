@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
-use Test::More tests => 30;
+use Test::More tests => 31;
 use lib 't/lib';
 
 BEGIN {
