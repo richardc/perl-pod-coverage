@@ -26,7 +26,7 @@ Pod::Coverage - Checks if the documentation of a module is comprehensive
 
   # straight OO
   use Pod::Coverage;
-  my $pc = Pod::Coverage-new(package => 'Pod::Coverage');
+  my $pc = Pod::Coverage->new(package => 'Pod::Coverage');
   print "We rock!" if $pc->coverage == 1;
 
 
