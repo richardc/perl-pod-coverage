@@ -10,7 +10,7 @@ use DynaLoader ();
 use base 'DynaLoader';
 
 use vars qw/ $VERSION /;
-$VERSION = '0.14';
+$VERSION = '0.15';
 
 =head1 NAME
 
@@ -74,7 +74,9 @@ C<package> the name of the package to analyse
 
 C<private> an array of regexen which define what symbols are regarded
 as private (and so need not be documented) defaults to /^_/,
-/^import$/, /^DESTROY/, /^AUTOLOAD/, /^bootstrap$/.
+/^import$/, /^DESTROY$/, /^AUTOLOAD$/, /^bootstrap$/, /^(TIE(SCALAR|ARRAY|HASH|HANDLE)|FETCH|STORE|UNTIE|FETCHSIZE|STORESIZE|POP|PUSH|SHIFT|UNSHIFT|SPLICE|DELETE|EXISTS|EXTEND|CLEAR|FIRSTKEY|NEXTKEY|PRINT|PRINTF|WRITE|READLINE|GETC|READ|CLOSE|BINMODE|OPEN|EOF|FILENO|SEEK|TELL)$/.  That last big one covers all the
+required and optional methods for tie()d objects, as these methods are
+(hardly) ever called by a user, being used internally by perl.
 
 C<also_private> items are appended to the private list
 
@@ -99,6 +101,7 @@ sub new {
         qr/^AUTOLOAD$/,
         qr/^bootstrap$/,
         qr/^\(/,
+	qr/^(TIE(SCALAR|ARRAY|HASH|HANDLE)|FETCH|STORE|UNTIE|FETCHSIZE|STORESIZE|POP|PUSH|SHIFT|UNSHIFT|SPLICE|DELETE|EXISTS|EXTEND|CLEAR|FIRSTKEY|NEXTKEY|PRINT|PRINTF|WRITE|READLINE|GETC|READ|CLOSE|BINMODE|OPEN|EOF|FILENO|SEEK|TELL)$/
        ];
     push @$private, @{ $args{also_private} || [] };
     my $trustme = $args{trustme} || [];
@@ -417,7 +420,7 @@ some contributions from David Cantrell <david@cantrell.org.uk>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001, 2003, 2003 Richard Clamp, Michael Stevens. All
+Copyright (c) 2001, 2003, 2004 Richard Clamp, Michael Stevens. All
 rights reserved.  This program is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.
 

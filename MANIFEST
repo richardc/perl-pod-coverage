@@ -17,6 +17,7 @@ t/04cvgv.t
 t/05parentage.t
 t/06trustme.t
 t/07pod.t
+t/08tie.t
 t/lib/Earle.pm
 t/lib/Simple1.pm
 t/lib/Simple2.pm
@@ -32,5 +33,6 @@ t/lib/GrandParent.pm
 t/lib/Parent.pm
 t/lib/Sibling.pm
 t/lib/Trustme.pm
+t/lib/Tie.pm
 examples/check_installed
 examples/script-covered
