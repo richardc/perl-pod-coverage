@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
-use Test::More tests => 16;
+use Test::More tests => 18;
 use lib 't/lib';
 use Pod::Coverage ();
 use Pod::Coverage::ExportOnly ();
@@ -58,3 +58,6 @@ $obj = new Pod::Coverage package => "Simple8";
 is( $obj->coverage,    undef, "can't deduce for Simple8" );
 is( $obj->why_unrated, 'no public symbols defined', 'why is correct' );
 
+$obj = Pod::Coverage->new( package => 'Earle' );
+is( $obj->coverage, 1, "earle is covered" );
+is( scalar $obj->covered, 2 );

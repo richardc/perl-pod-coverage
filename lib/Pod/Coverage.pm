@@ -354,6 +354,7 @@ package Pod::Coverage::Extractor;
 use Pod::Parser;
 use base 'Pod::Parser';
 
+use constant debug => 0;
 # extract subnames from a pod stream
 sub command {
     my $self = shift;
@@ -363,13 +364,16 @@ sub command {
         my @pods = ($text =~ /\s*([^\s\|,\/]+)/g);
 
         foreach my $pod (@pods) {
+            print "Considering: '$pod'\n" if debug;
+
             # it's dressed up like a method call
             $pod =~ /->(.*)/       and $pod = $1;
             # it's wrapped in a pod style B<>
-            $pod =~ /<(.*)>/       and $pod = $1;
-            # it's got example arguments
+            $pod =~ s/[A-Z]<//g;
+            $pod =~ s/>//g;
             $pod =~ /(\S+)\s*\(/   and $pod = $1;
 
+            print "Adding: '$pod'\n" if debug;
             push @{$self->{identifiers}}, $pod;
         }
     }

@@ -15,6 +15,7 @@ t/03import.t
 t/04cvgv.t
 t/05parentage.t
 t/06trustme.t
+t/lib/Earle.pm
 t/lib/Simple1.pm
 t/lib/Simple2.pm
 t/lib/Simple3.pm
