@@ -9,11 +9,11 @@ sub _get_syms {
 
     my %syms = map { $_ => 1 } $self->SUPER::_get_syms($package);
 
-    { 
-	no strict 'refs';
-	return keys %syms unless ${"$package\::OVERLOAD"}{dummy};
+    {
+        no strict 'refs';
+        return keys %syms unless ${"$package\::OVERLOAD"}{dummy};
     }
-    
+
     delete @syms{ grep { /^\(/ } keys %syms };
     return keys %syms;
 }
