@@ -2,12 +2,10 @@ use strict;
 
 package Pod::Coverage;
 use Devel::Symdump;
+use B;
 use Pod::Find qw(pod_where);
 
 BEGIN { defined &TRACE_ALL or eval 'sub TRACE_ALL () { 0 }' };
-
-use DynaLoader ();
-use base 'DynaLoader';
 
 use vars qw/ $VERSION /;
 $VERSION = '0.17';
@@ -350,7 +348,13 @@ sub _trustme_check {
     return grep { $sym =~ /$_/ } @{$self->{trustme} };
 }
 
-bootstrap Pod::Coverage;
+sub _CvGV {
+    my $self = shift;
+    my $cv = shift;
+    my $b_cv = B::svref_2object( $cv );
+    no strict 'refs';
+    return *{ $b_cv->GV->STASH->NAME . "::" . $b_cv->GV->NAME };
+}
 
 
 package Pod::Coverage::Extractor;

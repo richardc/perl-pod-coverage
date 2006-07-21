@@ -1,3 +1,7 @@
+HEAD
+	Rewrite _CvGV in terms of B::CV - no xs dependency anymore
+	(suggested by Tim Bunce)
+
 0.17	Tuesday 23rd November, 2004
 	Fixed a further case reported by Jos Boumans where
     	=head2 $self->foo(); was intepreted as documentation for a
