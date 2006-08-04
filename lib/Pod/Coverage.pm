@@ -80,7 +80,9 @@ qr/^import$/, qr/^DESTROY$/, qr/^AUTOLOAD$/, qr/^bootstrap$/,
              WRITE | READLINE | GETC | READ | CLOSE | BINMODE | OPEN |
              EOF | FILENO | SEEK | TELL)$/x,
         qr/^( MODIFY | FETCH )_( REF | SCALAR | ARRAY | HASH | CODE |
-                                 GLOB | FORMAT | IO)_ATTRIBUTES$/x, ]
+                                 GLOB | FORMAT | IO)_ATTRIBUTES$/x,
+        qr/^CLONE(_SKIP)?$/,
+]
 
 This should cover all the usual magical methods for tie()d objects,
 attributes, generally all the methods that are typically not called by
@@ -117,6 +119,7 @@ sub new {
              EOF | FILENO | SEEK | TELL)$/x,
         qr/^( MODIFY | FETCH )_( REF | SCALAR | ARRAY | HASH | CODE |
                                  GLOB | FORMAT | IO)_ATTRIBUTES $/x,
+        qr/^CLONE(_SKIP)?$/,
        ];
     push @$private, @{ $args{also_private} || [] };
     my $trustme = $args{trustme} || [];

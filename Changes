@@ -8,6 +8,10 @@ HEAD
         Support documentation where the method name is documented in a
 	::qualified style (rt #14635)
 
+	Ignores new (5.8) magic CLONE and CLONE_SKIP methods. (rt #17489)
+
+
+
 0.17	Tuesday 23rd November, 2004
 	Fixed a further case reported by Jos Boumans where
     	=head2 $self->foo(); was intepreted as documentation for a
