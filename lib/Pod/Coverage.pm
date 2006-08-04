@@ -352,8 +352,7 @@ sub _CvGV {
     my $self = shift;
     my $cv = shift;
     my $b_cv = B::svref_2object( $cv );
-    no strict 'refs';
-    return *{ $b_cv->GV->STASH->NAME . "::" . $b_cv->GV->NAME };
+    return *{ $b_cv->GV->object_2svref };
 }
 
 
