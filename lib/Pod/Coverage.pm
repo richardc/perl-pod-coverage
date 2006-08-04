@@ -72,9 +72,19 @@ C<package> the name of the package to analyse
 
 C<private> an array of regexen which define what symbols are regarded
 as private (and so need not be documented) defaults to /^_/,
-/^import$/, /^DESTROY$/, /^AUTOLOAD$/, /^bootstrap$/, /^(TIE(SCALAR|ARRAY|HASH|HANDLE)|FETCH|STORE|UNTIE|FETCHSIZE|STORESIZE|POP|PUSH|SHIFT|UNSHIFT|SPLICE|DELETE|EXISTS|EXTEND|CLEAR|FIRSTKEY|NEXTKEY|PRINT|PRINTF|WRITE|READLINE|GETC|READ|CLOSE|BINMODE|OPEN|EOF|FILENO|SEEK|TELL)$/.  That last big one covers all the
-required and optional methods for tie()d objects, as these methods are
-(hardly) ever called by a user, being used internally by perl.
+/^import$/, /^DESTROY$/, /^AUTOLOAD$/, /^bootstrap$/,
+        qr/^(TIE( SCALAR | ARRAY | HASH | HANDLE ) |
+             FETCH | STORE | UNTIE | FETCHSIZE | STORESIZE |
+             POP | PUSH | SHIFT | UNSHIFT | SPLICE | DELETE |
+             EXISTS | EXTEND | CLEAR | FIRSTKEY | NEXTKEY | PRINT | PRINTF |
+             WRITE | READLINE | GETC | READ | CLOSE | BINMODE | OPEN |
+             EOF | FILENO | SEEK | TELL)$/x,
+        qr/^( MODIFY | FETCH )_( REF | SCALAR | ARRAY | HASH | CODE |
+                                 GLOB | FORMAT | IO)_ATTRIBUTES$/x,
+
+This sould cover all the usual magical methods for tie()d objects,
+attributes, generally all the methods that are typically not called by
+a user, but instead being used internally by perl.
 
 C<also_private> items are appended to the private list
 
@@ -99,7 +109,14 @@ sub new {
         qr/^AUTOLOAD$/,
         qr/^bootstrap$/,
         qr/^\(/,
-        qr/^(TIE(SCALAR|ARRAY|HASH|HANDLE)|FETCH|STORE|UNTIE|FETCHSIZE|STORESIZE|POP|PUSH|SHIFT|UNSHIFT|SPLICE|DELETE|EXISTS|EXTEND|CLEAR|FIRSTKEY|NEXTKEY|PRINT|PRINTF|WRITE|READLINE|GETC|READ|CLOSE|BINMODE|OPEN|EOF|FILENO|SEEK|TELL)$/
+        qr/^(TIE( SCALAR | ARRAY | HASH | HANDLE ) |
+             FETCH | STORE | UNTIE | FETCHSIZE | STORESIZE |
+             POP | PUSH | SHIFT | UNSHIFT | SPLICE | DELETE |
+             EXISTS | EXTEND | CLEAR | FIRSTKEY | NEXTKEY | PRINT | PRINTF |
+             WRITE | READLINE | GETC | READ | CLOSE | BINMODE | OPEN |
+             EOF | FILENO | SEEK | TELL)$/x,
+        qr/^( MODIFY | FETCH )_( REF | SCALAR | ARRAY | HASH | CODE |
+                                 GLOB | FORMAT | IO)_ATTRIBUTES $/x,
        ];
     push @$private, @{ $args{also_private} || [] };
     my $trustme = $args{trustme} || [];
@@ -352,7 +369,12 @@ sub _CvGV {
     my $self = shift;
     my $cv = shift;
     my $b_cv = B::svref_2object( $cv );
-    return *{ $b_cv->GV->object_2svref };
+    # perl 5.6.2's B doesn't have an object_2svref.  in 5.8 you can
+    # just do this:
+    # return *{ $b_cv->GV->object_2svref };
+    # but for backcompat we're forced into this uglyness:
+    no strict 'refs';
+    return *{ $b_cv->GV->STASH->NAME . "::" . $b_cv->GV->NAME };
 }
 
 
