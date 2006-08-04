@@ -362,7 +362,7 @@ return true if the symbol is a 'trustme' symbol
 
 sub _trustme_check {
     my($self, $sym) = @_;
-    return grep { $sym =~ /$_/ } @{$self->{trustme} };
+    return grep { $sym =~ /$_/ } @{ $self->{trustme} };
 }
 
 sub _CvGV {
