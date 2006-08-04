@@ -71,8 +71,8 @@ Creates a new Pod::Coverage object.
 C<package> the name of the package to analyse
 
 C<private> an array of regexen which define what symbols are regarded
-as private (and so need not be documented) defaults to /^_/,
-/^import$/, /^DESTROY$/, /^AUTOLOAD$/, /^bootstrap$/,
+as private (and so need not be documented) defaults to [ qr/^_/,
+qr/^import$/, qr/^DESTROY$/, qr/^AUTOLOAD$/, qr/^bootstrap$/,
         qr/^(TIE( SCALAR | ARRAY | HASH | HANDLE ) |
              FETCH | STORE | UNTIE | FETCHSIZE | STORESIZE |
              POP | PUSH | SHIFT | UNSHIFT | SPLICE | DELETE |
@@ -80,9 +80,9 @@ as private (and so need not be documented) defaults to /^_/,
              WRITE | READLINE | GETC | READ | CLOSE | BINMODE | OPEN |
              EOF | FILENO | SEEK | TELL)$/x,
         qr/^( MODIFY | FETCH )_( REF | SCALAR | ARRAY | HASH | CODE |
-                                 GLOB | FORMAT | IO)_ATTRIBUTES$/x,
+                                 GLOB | FORMAT | IO)_ATTRIBUTES$/x, ]
 
-This sould cover all the usual magical methods for tie()d objects,
+This should cover all the usual magical methods for tie()d objects,
 attributes, generally all the methods that are typically not called by
 a user, but instead being used internally by perl.
 
