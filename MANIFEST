@@ -35,5 +35,6 @@ t/lib/Sibling.pm
 t/lib/Trustme.pm
 t/lib/Tie.pm
 t/lib/XS4ALL.pm
+t/lib/Fully/Qualified.pm
 examples/check_installed
 examples/script-covered

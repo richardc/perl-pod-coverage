@@ -397,6 +397,8 @@ sub command {
             # it's dressed up like a method cal
             $pod =~ /-E<\s*gt\s*>(.*)/  and $pod = $1;
             $pod =~ /->(.*)/            and $pod = $1;
+            # it's used as a (bare) fully qualified name
+            $pod =~ /\w+(?:::\w+)*::(\w+)/ and $pod = $1;
             # it's wrapped in a pod style B<>
             $pod =~ s/[A-Z]<//g;
             $pod =~ s/>//g;

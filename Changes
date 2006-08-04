@@ -2,6 +2,12 @@ HEAD
 	Rewrite _CvGV in terms of B::CV - no xs dependency anymore
 	(suggested by Tim Bunce)
 
+        Add the (FETCH|MODIFY)_$foo_ATTRIBUTES methods to the private
+	stoplists. (rt #12451)
+
+        Support documentation where the method name is documented in a
+	::qualified style (rt #14635)
+
 0.17	Tuesday 23rd November, 2004
 	Fixed a further case reported by Jos Boumans where
     	=head2 $self->foo(); was intepreted as documentation for a

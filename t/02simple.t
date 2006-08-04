@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
-use Test::More tests => 32;
+use Test::More tests => 33;
 use lib 't/lib';
 
 BEGIN {
@@ -79,3 +79,6 @@ is( $obj->coverage, 1, "Args is covered" );
 
 $obj = Pod::Coverage->new( package => 'XS4ALL' );
 is( $obj->coverage, 1, "XS4ALL is covered" );
+
+$obj = Pod::Coverage->new( package => 'Fully::Qualified' );
+is( $obj->coverage, 1, "Fully::Qualified is covered" );
