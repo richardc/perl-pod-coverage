@@ -1,4 +1,4 @@
-HEAD
+0.18    Friday 4th August, 2006
 	Rewrite _CvGV in terms of B::CV - no xs dependency anymore
 	(suggested by Tim Bunce)
 
