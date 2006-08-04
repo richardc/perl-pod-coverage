@@ -97,6 +97,9 @@ for them
 If C<pod_from> is supplied, that file is parsed for the documentation,
 rather than using Pod::Find
 
+If C<nonwhitespace> is supplied, then only POD sections which have
+non-whitespace characters will count towards being documented.
+
 =cut
 
 sub new {
@@ -123,8 +126,9 @@ sub new {
        ];
     push @$private, @{ $args{also_private} || [] };
     my $trustme = $args{trustme} || [];
+    my $nonwhitespace = $args{nonwhitespace} || undef;
 
-    my $self = bless { @_, private => $private, trustme => $trustme }, $class;
+    my $self = bless { @_, private => $private, trustme => $trustme, nonwhitespace => $nonwhitespace }, $class;
 }
 
 =item $object->coverage
@@ -294,6 +298,7 @@ sub _get_syms {
 
     print "requiring '$package'\n" if TRACE_ALL;
     eval qq{ require $package };
+    print "require failed with $@\n" if TRACE_ALL and $@;
     return if $@;
 
     print "walking symbols\n" if TRACE_ALL;
@@ -339,6 +344,7 @@ sub _get_pods {
 
     print "parsing '$pod_from'\n" if TRACE_ALL;
     my $pod = Pod::Coverage::Extractor->new;
+    $pod->{nonwhitespace} = $self->{nonwhitespace};
     $pod->parse_from_file( $pod_from, '/dev/null' );
 
     return $pod->{identifiers} || [];
@@ -393,6 +399,7 @@ sub command {
     if ($command eq 'item' || $command =~ /^head(?:2|3|4)/) {
         # take a closer look
         my @pods = ($text =~ /\s*([^\s\|,\/]+)/g);
+        $self->{recent} = [];
 
         foreach my $pod (@pods) {
             print "Considering: '$pod'\n" if debug;
@@ -409,11 +416,19 @@ sub command {
             $pod =~ /(\w+)\s*[;\(]/   and $pod = $1;
 
             print "Adding: '$pod'\n" if debug;
-            push @{$self->{identifiers}}, $pod;
+            push @{$self->{$self->{nonwhitespace} ? "recent" : "identifiers"}}, $pod;
         }
     }
 }
 
+sub textblock {
+    my $self = shift;
+    my ($text, $line_num) = shift;
+    if ($self->{nonwhitespace} and $text =~ /\S/ and $self->{recent}) {
+        push @{$self->{identifiers}}, @{$self->{recent}};
+        $self->{recent} = [];
+    }
+}
 
 1;
 
