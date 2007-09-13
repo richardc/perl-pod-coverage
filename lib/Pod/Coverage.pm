@@ -311,9 +311,12 @@ sub _get_syms {
     for my $sym ( $syms->functions ) {
 
         # see if said method wasn't just imported from elsewhere
-        my $owner = $self->_CvGV( \&{$sym} );
-        $owner =~ s/^\*(.*)::.*?$/$1/;
-        next if $owner ne $self->{package};
+        my $glob = do { no strict 'refs'; \*{$sym} };
+        my $o = B::svref_2object($glob);
+
+        # in 5.005 this flag is not exposed via B, though it exists
+        my $imported_cv = eval { B::GVf_IMPORTED_CV() } || 0x80;
+        next if $o->GvFLAGS & $imported_cv;
 
         # check if it's on the whitelist
         $sym =~ s/$self->{package}:://;

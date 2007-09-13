@@ -1,3 +1,9 @@
+HEAD
+	Don't use _CvGV to determine if a sub was imported, there's a handy
+	flag - GVf_IMPORTED_CV.  Fixes 5.9.5 and future perls
+	(solution by Nicholas Clark)
+
+
 0.18    Friday 4th August, 2006
 	Rewrite _CvGV in terms of B::CV - no xs dependency anymore
 	(suggested by Tim Bunce)
