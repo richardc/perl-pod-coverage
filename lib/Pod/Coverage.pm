@@ -8,7 +8,7 @@ use Pod::Find qw(pod_where);
 BEGIN { defined &TRACE_ALL or eval 'sub TRACE_ALL () { 0 }' }
 
 use vars qw/ $VERSION /;
-$VERSION = '0.18';
+$VERSION = '0.19';
 
 =head1 NAME
 
@@ -479,7 +479,7 @@ some contributions from David Cantrell <david@cantrell.org.uk>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001, 2003, 2004, 2006 Richard Clamp, Michael
+Copyright (c) 2001, 2003, 2004, 2006, 2007 Richard Clamp, Michael
 Stevens. All rights reserved.  This program is free software; you can
 redistribute it and/or modify it under the same terms as Perl itself.
 

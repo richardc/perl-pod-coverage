@@ -1,4 +1,4 @@
-HEAD
+0.19	Thursday 13th September, 2007
 	Don't use _CvGV to determine if a sub was imported, there's a handy
 	flag - GVf_IMPORTED_CV.  Fixes 5.9.5 and future perls
 	(solution by Nicholas Clark)
