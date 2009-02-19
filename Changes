@@ -1,3 +1,7 @@
+0.20	Thursday 19th February, 2009
+	Fix t/lib/Fully/Qualified.pm to have a 1; (Zefram)
+	Ship t/09whitespace.t - had missed it before
+
 0.19	Thursday 13th September, 2007
 	Don't use _CvGV to determine if a sub was imported, there's a handy
 	flag - GVf_IMPORTED_CV.  Fixes 5.9.5 and future perls
