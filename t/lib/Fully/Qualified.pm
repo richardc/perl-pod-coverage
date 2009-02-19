@@ -42,3 +42,4 @@ sub ex_sub2 { "in ex_sub2" }
 
 =cut
 
+1;
