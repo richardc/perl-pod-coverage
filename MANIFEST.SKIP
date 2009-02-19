@@ -2,6 +2,8 @@
 ^Build$
 ^blib/
 ^_build
+^\.git/
+^\.gitignore$
 .svn/
 \.tar\.gz$
 \bCVS\b
