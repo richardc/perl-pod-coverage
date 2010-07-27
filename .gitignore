@@ -1,3 +1,6 @@
 Build
 _build
 blib
+Makefile.PL
+META.yml
+Pod-Coverage-[0-9]*
