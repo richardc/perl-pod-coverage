@@ -1,3 +1,7 @@
+HEAD
+	Add SCALAR to the stoplist (implementaion method for tied
+	hashes).  Report by David Cantrell.
+
 0.20	Thursday 19th February, 2009
 	Fix t/lib/Fully/Qualified.pm to have a 1; (Zefram)
 	Ship t/09whitespace.t - had missed it before
