@@ -1,3 +1,6 @@
+0.22	???
+	Add "unimport" to the stoplist. (rt #33914)
+
 0.21	Tuesday 27th July, 2010
 	Add SCALAR to the stoplist (implementaion method for tied
 	hashes).  Report by David Cantrell.
