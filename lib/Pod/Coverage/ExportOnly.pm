@@ -45,7 +45,7 @@ L<Pod::Coverage>, L<Exporter>, L<UNIVERSAL::exports>
 
 =head1 AUTHORS
 
-Copyright (c) 2001 Richard Clamp, Micheal Stevens. All rights
+Copyright (c) 2001 Richard Clamp, Michael Stevens. All rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
