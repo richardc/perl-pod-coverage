@@ -1,13 +1,10 @@
 ~$
-^Build$
+^Makefile$
 ^blib/
-^_build
 ^\.git/
 ^\.gitignore$
-.svn/
 \.tar\.gz$
 \bCVS\b
-\.cvsignore
 MANIFEST.SKIP
 cover_db/
 pm_to_blib

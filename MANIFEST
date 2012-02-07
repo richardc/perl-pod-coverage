@@ -1,7 +1,6 @@
 MANIFEST
 Changes
 Makefile.PL
-Build.PL
 META.yml
 bin/pod_cover
 lib/Pod/Coverage.pm
