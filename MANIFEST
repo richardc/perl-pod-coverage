@@ -28,6 +28,7 @@ t/lib/Simple5.pm
 t/lib/Simple6.pm
 t/lib/Simple7.pm
 t/lib/Simple8.pm
+t/lib/Simple9.pm
 t/lib/Child.pm
 t/lib/GrandParent.pm
 t/lib/Parent.pm
