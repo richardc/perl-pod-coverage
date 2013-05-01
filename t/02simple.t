@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
-use Test::More tests => 33;
+use Test::More tests => 36;
 use lib 't/lib';
 
 BEGIN {
@@ -69,6 +69,12 @@ isa_ok( $obj, 'Pod::Coverage' );
 
 is( $obj->coverage,    undef, "can't deduce for Simple8" );
 is( $obj->why_unrated, 'no public symbols defined', 'why is correct' );
+
+$obj = Pod::Coverage->new(package => 'Simple9');
+isa_ok($obj, 'Pod::Coverage');
+
+is($obj->coverage, undef, 'Simple9 has no coverage');
+is($obj->why_unrated, "requiring 'Simple9' failed", 'why is correct');
 
 $obj = Pod::Coverage->new( package => 'Earle' );
 is( $obj->coverage, 1, "earle is covered" );

@@ -151,6 +151,11 @@ sub coverage {
 
     my %symbols = map { $_ => 0 } $self->_get_syms($package);
 
+    if (!%symbols && $self->{why_unrated}) {
+        # _get_syms failed violently
+        return;
+    }
+
     print "tying shoelaces\n" if TRACE_ALL;
     for my $pod (@$pods) {
         $symbols{$pod} = 1 if exists $symbols{$pod};
@@ -301,8 +306,11 @@ sub _get_syms {
 
     print "requiring '$package'\n" if TRACE_ALL;
     eval qq{ require $package };
-    print "require failed with $@\n" if TRACE_ALL and $@;
-    return if $@;
+    if ($@) {
+        print "require failed with $@\n" if TRACE_ALL;
+        $self->{why_unrated} = "requiring '$package' failed";
+        return;
+    }
 
     print "walking symbols\n" if TRACE_ALL;
     my $syms = Devel::Symdump->new($package);
